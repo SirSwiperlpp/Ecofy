@@ -1,0 +1,4 @@
+name: Ecofy
+version: '${project.version}'
+main: de.realityrift.ecofy.Main.Main
+api-version: '1.20'

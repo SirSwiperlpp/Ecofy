@@ -1,0 +1,10 @@
+host: "0.0.0.0"
+port: 3306
+user: "root"
+pwd: ""
+
+accountReset:
+  #this option describes if the accountReset command can be run by permitted players.
+  active: true
+  #this option describes if player with op are immune against a accountReset
+  opIsInvincible: true
