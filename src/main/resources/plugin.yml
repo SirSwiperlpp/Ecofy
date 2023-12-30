@@ -2,3 +2,14 @@ name: Ecofy
 version: '${project.version}'
 main: de.realityrift.ecofy.Main.Main
 api-version: '1.20'
+
+commands:
+  eco:
+    permission: eco.use
+    #tab-completer:
+
+permissions:
+  eco.use:
+    default: true
+  eco.money.other:
+    default: op

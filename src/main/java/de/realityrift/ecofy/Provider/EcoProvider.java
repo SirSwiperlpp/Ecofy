@@ -11,7 +11,7 @@ public class EcoProvider
 {
     public static void createEcoTable() throws SQLException
     {
-        PreparedStatement ps = EcoSQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS ecotable (player_name VARCHAR(100), UUID VARCHAR(100), money INT)");
+        PreparedStatement ps = EcoSQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS ecotable (player_name VARCHAR(100), UUID VARCHAR(100), money INT, PRIMARY KEY(player_name))");
         ps.executeUpdate();
     }
 

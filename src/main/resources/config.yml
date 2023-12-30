@@ -8,3 +8,10 @@ accountReset:
   active: true
   #this option describes if player with op are immune against a accountReset
   opIsInvincible: true
+
+enableCommands:
+  pay: true
+  money: true
+  set: true
+  reset: true
+  summonbanker: false

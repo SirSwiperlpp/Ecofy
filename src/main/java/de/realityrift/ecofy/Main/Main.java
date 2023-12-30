@@ -1,12 +1,18 @@
 package de.realityrift.ecofy.Main;
 
+import de.realityrift.ecofy.Commands.EcoCMD;
 import de.realityrift.ecofy.Language.Language;
+import de.realityrift.ecofy.Listener.PlayerListener;
+import de.realityrift.ecofy.Provider.EcoProvider;
 import de.realityrift.ecofy.SQL.EcoSQL;
+import de.realityrift.ecofy.TabCompleter.EcoTab;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.sql.SQLException;
 
 public final class Main extends JavaPlugin {
 
@@ -52,6 +58,15 @@ public final class Main extends JavaPlugin {
         loadConfiguration();
         checkAndCreateLanguageFile();
         EcoSQL.connect("ecofydb");
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+        EcoCMD ecoCMD = new EcoCMD();
+        getCommand("eco").setExecutor(ecoCMD);
+        getCommand("eco").setTabCompleter(new EcoTab(ecoCMD));
+        try {
+            EcoProvider.createEcoTable();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
