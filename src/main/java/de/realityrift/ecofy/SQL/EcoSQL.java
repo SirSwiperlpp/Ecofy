@@ -24,7 +24,7 @@ public class EcoSQL
     public static void connect(String database) {
         if (!isConnected()) {
             try {
-                String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true";
+                String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?connectTimeout=0&socketTimeout=0&autoReconnect=true";
 
                 con = DriverManager.getConnection(url, username, password);
                 System.out.println(language.translateString("connection.established", database));

@@ -13,3 +13,5 @@ permissions:
     default: true
   eco.money.other:
     default: op
+  eco.set.admin:
+    default: op

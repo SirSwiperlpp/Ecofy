@@ -97,6 +97,35 @@ public class EcoCMD implements CommandExecutor
                 break;
 
             case "set":
+                if (!Main.config.getBoolean("enableCommands.set"))
+                {
+                    player.sendMessage(language.get("prefix") + language.get("command.disabled"));
+                    return true;
+                }
+
+                if (!player.hasPermission("eco.set.admin"))
+                {
+                    player.sendMessage(language.get("prefix") + language.get("no.permission"));
+                    return true;
+                }
+
+                if (strings.length == 3)
+                {
+                    if (Bukkit.getPlayer(strings[1]) == null)
+                    {
+                        player.sendMessage(language.get("prefix") + language.get("reciever.offline"));
+                        return true;
+                    }
+
+                    String stringToInt = filterNumber(strings[2]);
+                    if (!isNumber(stringToInt))
+                    {
+                        player.sendMessage(language.get("prefix") + language.get("set.usage"));
+                        return true;
+                    }
+                    EcoAPI.setMoney(String.valueOf(Bukkit.getPlayer(strings[1]).getUniqueId()), Integer.parseInt(stringToInt));
+                    player.sendMessage(language.get("prefix") + language.get("setupdate.executed"));
+                }
                 break;
 
             case "reset":
@@ -117,5 +146,11 @@ public class EcoCMD implements CommandExecutor
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public String filterNumber(String unfiltered)
+    {
+        String filtered = unfiltered.replaceAll("[-+]", "");
+        return filtered;
     }
 }
